@@ -1,21 +1,31 @@
 <template>
   <v-layout>
     <v-app-bar
+      elevation="0"
+      style="border-bottom: 1px solid rgba(0, 0, 0, 0.1)"
       theme="light"
-      extended
-      extension-height="130"
-      color="orange"
-      image="https://i.pinimg.com/originals/17/40/03/1740037aa56589d4d5148e673e0fad2d.jpg"
+      color="white"
     >
-      <v-app-bar-nav-icon color="white"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <v-app-bar-title style="color: white">My AppBar Title</v-app-bar-title>
-      <v-icon class="mr-4" color="white">mdi-magnify</v-icon>
-      <v-icon class="mr-4" color="white">mdi-heart</v-icon>
-      <v-icon color="white">mdi-dots-vertical</v-icon>
+      <v-icon class="mr-4">mdi-magnify</v-icon>
+      <v-icon class="mr-4">mdi-heart</v-icon>
+      <v-icon>mdi-dots-vertical</v-icon>
     </v-app-bar>
 
-    <v-bottom-navigation class="bg-cyan">
+    <v-app-bar elevation="2">
+      <!-- <v-breadcrumbs :items="items" divider=">>"></v-breadcrumbs> -->
+      <v-breadcrumbs :items="items" divider="-">
+        <!-- If you need to make override on props then you can make it through template have v-slot:<name-of-props> -->
+        <!-- so this will override the divider props in the parent component (v-breadcrumbs) -->
+        <template v-slot:divider>
+          <v-icon>mdi-chevron-right</v-icon>
+        </template>
+      </v-breadcrumbs>
+    </v-app-bar>
+
+    <v-bottom-navigation height="60" class="bg-cyan">
       <v-btn>
         <v-icon color="white">mdi-home</v-icon>
       </v-btn>
@@ -29,6 +39,12 @@
   </v-layout>
   <router-view />
 </template>
+
+<script setup>
+import { ref } from "vue";
+
+const items = ref(["test 1", "test 2", "test 3"]);
+</script>
 
 <style lang="scss">
 #app {
