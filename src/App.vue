@@ -1,10 +1,5 @@
 <template>
-  <!-- v-layout is container of group of objects  -->
   <v-layout>
-    <!-- elevation -->
-    <!-- color -->
-    <!-- collapse -->
-    <!-- extended extension-height="100" -->
     <v-app-bar
       theme="light"
       extended
@@ -19,6 +14,18 @@
       <v-icon class="mr-4" color="white">mdi-heart</v-icon>
       <v-icon color="white">mdi-dots-vertical</v-icon>
     </v-app-bar>
+
+    <v-bottom-navigation class="bg-cyan">
+      <v-btn>
+        <v-icon color="white">mdi-home</v-icon>
+      </v-btn>
+      <v-btn>
+        <v-icon color="white">mdi-account</v-icon>
+      </v-btn>
+      <v-btn>
+        <v-icon color="white">mdi-music</v-icon>
+      </v-btn>
+    </v-bottom-navigation>
   </v-layout>
   <router-view />
 </template>
