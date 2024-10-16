@@ -1,29 +1,25 @@
 <template>
-  <v-toolbar elevation="5" class="px-5">
-    <div>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-      <v-tooltip activator="parent">Menu</v-tooltip>
-    </div>
-
-    <div>
-      <v-toolbar-title>My ToolBar Title</v-toolbar-title>
-      <v-tooltip activator="parent">My ToolBar title</v-tooltip>
-    </div>
-    <v-spacer></v-spacer>
-    <div>
-      <v-icon class="mr-3"> mdi-account </v-icon>
-      <v-tooltip activator="parent" location="bottom">Profile</v-tooltip>
-    </div>
-
-    <div>
-      <v-icon> mdi-logout </v-icon>
-      <v-tooltip activator="parent" location="bottom">Logout</v-tooltip>
-    </div>
-  </v-toolbar>
-  <!-- <nav> -->
-  <!-- <router-link to="/">Home</router-link> | -->
-  <!-- <router-link to="/about">About</router-link> -->
-  <!-- </nav> -->
+  <!-- v-layout is container of group of objects  -->
+  <v-layout>
+    <!-- elevation -->
+    <!-- color -->
+    <!-- collapse -->
+    <!-- extended extension-height="100" -->
+    <v-app-bar
+      theme="light"
+      extended
+      extension-height="130"
+      color="orange"
+      image="https://i.pinimg.com/originals/17/40/03/1740037aa56589d4d5148e673e0fad2d.jpg"
+    >
+      <v-app-bar-nav-icon color="white"></v-app-bar-nav-icon>
+      <v-spacer></v-spacer>
+      <v-app-bar-title style="color: white">My AppBar Title</v-app-bar-title>
+      <v-icon class="mr-4" color="white">mdi-magnify</v-icon>
+      <v-icon class="mr-4" color="white">mdi-heart</v-icon>
+      <v-icon color="white">mdi-dots-vertical</v-icon>
+    </v-app-bar>
+  </v-layout>
   <router-view />
 </template>
 
