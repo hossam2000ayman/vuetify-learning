@@ -1,70 +1,45 @@
 <template>
   <v-layout>
-    <v-card min-height="60vh" min-width="100%" :loading="loading">
-      <v-container>
-        <v-row>
-          <v-col cols="12">
-            <v-row style="height: 100%" v-if="!loading">
-              <v-col cols="3" v-for="item in passengers.data" :key="item._id">
-                <v-card>
-                  <v-card-title>{{ item.name }}</v-card-title>
-                  <v-card-title>{{ item.trips }}</v-card-title>
-                </v-card>
-              </v-col>
-            </v-row>
-          </v-col>
-          <v-col cols="12">
-            <v-card>
-              <v-pagination
-                rounded
-                v-model="page"
-                :length="passengers.totalPages"
-                color="blue"
-                @update:model-value="getData"
-                prev-icon="mdi-arrow-left"
-                next-icon="mdi-arrow-right"
-              ></v-pagination>
-            </v-card>
-          </v-col>
-          <v-col cols="12">
-            <v-btn @click="getData">Fetch</v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
+    <v-app-bar color="blue">
+      <v-app-bar-nav-icon @click="isDrawer = !isDrawer"></v-app-bar-nav-icon>
+    </v-app-bar>
+    <v-card min-width="100%">
+      <v-navigation-drawer color="white" permanent rail expand-on-hover>
+        <v-list nav>
+          <v-list-item
+            class="text-start"
+            v-for="num in 5"
+            :key="num"
+            :value="num"
+            prepend-icon="mdi-home"
+            @click="console.log('clicked List', num)"
+          >
+            <v-list-item-title> List {{ num }} </v-list-item-title>
+          </v-list-item>
+          <v-list-group>
+            <template v-slot:activator="{ props }">
+              <v-list-item prepend-icon="mdi-account" v-bind="props">
+                <v-list-item-title>Test</v-list-item-title>
+              </v-list-item>
+            </template>
+            <v-list-item v-for="num in 8" :key="num">
+              <v-list-item-title> Test {{ num }} </v-list-item-title>
+            </v-list-item>
+          </v-list-group>
+        </v-list>
+      </v-navigation-drawer>
     </v-card>
   </v-layout>
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
-const passengers = ref([]);
-const page = ref(1);
-const loading = ref(false);
-onMounted(async () => {
-  await getData();
-});
-const getData = async () => {
-  loading.value = true;
-  await fetch(
-    `https://api.instantwebtools.net/v1/passenger?page=${
-      page.value - 1
-    }&size=10`
-  )
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("data :: ", data);
-      passengers.value = data;
-    });
-  loading.value = false;
-};
+const isDrawer = ref(false);
 </script>
 <style scoped>
-* {
+.v-list .v-list-item--nav:not(:only-child) {
   display: flex;
-  text-align: center;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
 }
 </style>
