@@ -1,19 +1,18 @@
 <template>
   <v-layout>
     <v-card min-width="100%" class="pa-5" min-height="90vh" variant="outlined">
-      <div v-if="selectedUser">Selected Name :: {{ selectedUser }}</div>
-      <v-radio-group
-        v-model="selectedUser"
-        append-icon="mdi-home"
-        prepend-icon="mdi-account"
-        false-icon="mdi-close-outline"
-        true-icon="mdi-check-outline"
-      >
-        <!-- v-radio-group is the parent of the radio button -->
-        <v-radio label="Ahmed" value="_Ahmed"></v-radio>
-        <v-radio label="Samy" value="_Samy"></v-radio>
-      </v-radio-group>
-      <!-- <v-text-field readonly value="disabled text"></v-text-field> -->
+      {{ imageFile }}
+      <v-file-input
+        multiple
+        v-model:model-value="imageFile"
+        @update:model-value="renderImage"
+        chips
+        variant="outlined"
+      ></v-file-input>
+
+      <v-card>
+        <img :src="imageUrl" alt="" class="pl-10" width="600px" />
+      </v-card>
     </v-card>
   </v-layout>
 </template>
@@ -21,6 +20,22 @@
 <script setup>
 import { ref } from "vue";
 
-const selectedUser = ref(null);
+const imageFile = ref("");
+const imageUrl = ref("");
+
+const renderImage = () => {
+  if (!imageFile.value[0]) {
+    imageUrl.value = "";
+    return;
+  }
+  console.log("validated");
+  const file = imageFile.value[0];
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.addEventListener("load", () => {
+    console.log("File Reader :: ", reader.result);
+    imageUrl.value = reader.result;
+  });
+};
 </script>
 <style scoped></style>
