@@ -1,37 +1,34 @@
 <template>
   <v-layout>
-    <v-card min-width="100%" class="pa-5" min-height="90vh" variant="outlined">
-      {{ range }}
-      <v-slider
-        :min="0"
-        :max="10"
-        v-model="range"
-        step="0.25"
-        color="red"
-        track-color="blue"
-        thumb-label="always"
-        thumb-size="30"
-        class="mt-6"
-        append-icon="mdi-plus"
-        prepend-icon="mdi-minus"
-        @click:append="increment"
-        @click:prepend="decrement"
-      ></v-slider>
+    <v-app-bar :theme="switchTheme"></v-app-bar>
+    <v-card
+      min-width="100%"
+      class="pa-5 mt-10"
+      min-height="90vh"
+      variant="outlined"
+    >
+      <v-switch
+        :label="`Theme: ${switchTheme}`"
+        v-model="switchTheme"
+        false-value="light"
+        true-value="dark"
+      ></v-switch>
     </v-card>
+
+    <v-footer app class="pa-5" :theme="switchTheme">
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis error
+        sit ad iure! Nulla cum voluptate inventore impedit, vel esse beatae
+        quibusdam rerum, unde voluptatem explicabo eveniet nihil, asperiores
+        iure!
+      </p>
+    </v-footer>
   </v-layout>
 </template>
 
 <script setup>
 import { ref } from "vue";
 
-const range = ref(0);
-
-const decrement = () => {
-  range.value -= 1;
-};
-
-const increment = () => {
-  range.value += 1;
-};
+const switchTheme = ref("light");
 </script>
 <style scoped></style>
