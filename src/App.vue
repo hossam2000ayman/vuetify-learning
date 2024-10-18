@@ -27,11 +27,11 @@ import { ref } from "vue";
 const range = ref(0);
 
 const decrement = () => {
-  range.value -= 0.25;
+  range.value -= 1;
 };
 
 const increment = () => {
-  range.value += 0.25;
+  range.value += 1;
 };
 </script>
 <style scoped></style>
