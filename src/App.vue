@@ -1,32 +1,28 @@
 <template>
   <div class="d-flex align-center flex-column pa-6">
-    <v-card width="70%" class="pa-5 text-center" heigth="500">
-      <v-rating
-        v-model="rating"
-        color="warning"
-        half-increments
-        hover
-        active-color="info"
-        :length="labels.length"
-        :item-labels="labels"
-        size="70"
-        ripple
-        clearable
+    <v-card width="70%" class="pa-5 text-center" height="400">
+      <v-snackbar
+        v-model="showSnackbar"
+        timeout="3000"
+        color="success"
+        variant="outlined"
       >
-        <template v-slot:item-label="props">
-          <span style="font-size: 15px" :class="`text-${colors[props.index]}`">
-            {{ props.label }}
-          </span>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos nesciunt
+        magni quas tempora neque deleniti laborum aperiam, aspernatur,
+        consectetur quis maiores! Dolore necessitatibus at molestiae ex iste
+        eaque pariatur vel?
+        <template v-slot:actions>
+          <v-btn @click="showSnackbar = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
         </template>
-      </v-rating>
+      </v-snackbar>
+      <v-btn @click="showSnackbar = !showSnackbar">Show Snackbar </v-btn>
     </v-card>
-    {{ rating }}
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-const rating = ref(0);
-const labels = ref(["bad", "fair", "good", "v.good", "excellent", "amazing"]);
-const colors = ref(["error", "yellow", "warning", "info", "success"]);
+const showSnackbar = ref(false);
 </script>
